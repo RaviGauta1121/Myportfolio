@@ -1052,7 +1052,7 @@ export default function Home() {
           tags={["React.js", "Firebase", "CSS", "JavaScript"]}
           imageUrl="/bad-talk.png"
           githubUrl="https://github.com/RaviGauta1121"
-          liveUrl="#"
+          liveUrl="https://bad-talks.iesipsacademystudentclubs.org/"
           index={0}
         />
       </motion.div>
@@ -1063,7 +1063,7 @@ export default function Home() {
           tags={["Node.js", "MongoDB", "TailwindCSS", "EJS"]}
           imageUrl="/wanderlust.png"
           githubUrl="https://github.com/RaviGauta1121"
-          liveUrl="#"
+          liveUrl="https://wanderlst.onrender.com/"
           index={1}
         />
       </motion.div>
@@ -1074,7 +1074,7 @@ export default function Home() {
           tags={["Next.js", "MongoDB", "Auth0", "TinyMCE"]}
           imageUrl="/study-buddy.png"
           githubUrl="https://github.com/RaviGauta1121"
-          liveUrl="#"
+          liveUrl="https://studybuddy-woad.vercel.app/"
           index={2}
         />
       </motion.div>
@@ -1085,7 +1085,7 @@ export default function Home() {
           tags={["React.js", "API", "TailwindCSS", "Chart.js"]}
           imageUrl="/fit-assistant.png"
           githubUrl="https://github.com/RaviGauta1121"
-          liveUrl="#"
+          liveUrl="https://starlit-seahorse-399d1d.netlify.app/"
           index={3}
         />
       </motion.div>
@@ -1096,7 +1096,7 @@ export default function Home() {
     tags={["Node.js", "MongoDB", "EJS", "TailwindCSS", "Cloudinary"]}
     imageUrl="/biofuel.png"
     githubUrl="https://github.com/RaviGauta1121"
-    liveUrl="#"
+    liveUrl="https://biofuel.vercel.app/qualitybio.in/"
     index={4}
   />
 </motion.div>
