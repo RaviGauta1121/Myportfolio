@@ -1063,7 +1063,7 @@ export default function Home() {
           tags={["Node.js", "MongoDB", "TailwindCSS", "EJS"]}
           imageUrl="/wanderlust.png"
           githubUrl="https://github.com/RaviGauta1121"
-          liveUrl="https://wanderlst.onrender.com/"
+          liveUrl="https://stayfinder-05xq.onrender.com/listings"
           index={1}
         />
       </motion.div>
