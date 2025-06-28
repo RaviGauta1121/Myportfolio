@@ -165,20 +165,20 @@ export default function AboutSection() {
     <section
       id="about"
       ref={containerRef}
-      className="relative w-full py-12 md:py-20 lg:py-24 overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"
+      className="relative w-full py-12 md:py-20 lg:py-24 overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-gray-900 dark:via-black dark:to-gray-900"
     >
       {/* Simplified background effects for mobile */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
-          className="absolute top-0 -right-10 w-64 md:w-96 h-64 md:h-96 bg-gradient-to-br from-blue-500/20 via-purple-500/10 to-pink-500/20 rounded-full blur-3xl"
+          className="absolute top-0 -right-10 w-64 md:w-96 h-64 md:h-96 bg-gradient-to-br from-blue-500/20 via-purple-500/10 to-pink-500/20 dark:from-blue-400/30 dark:via-purple-400/15 dark:to-pink-400/30 rounded-full blur-3xl"
           style={{ y, opacity }}
         />
         <motion.div 
-          className="absolute bottom-0 left-0 w-48 md:w-80 h-48 md:h-80 bg-gradient-to-tr from-cyan-500/20 via-blue-500/10 to-indigo-500/20 rounded-full blur-3xl"
+          className="absolute bottom-0 left-0 w-48 md:w-80 h-48 md:h-80 bg-gradient-to-tr from-cyan-500/20 via-blue-500/10 to-indigo-500/20 dark:from-cyan-400/30 dark:via-blue-400/15 dark:to-indigo-400/30 rounded-full blur-3xl"
           style={{ y: useTransform(scrollYProgress, [0, 1], [-25, 25]) }}
         />
         <motion.div 
-          className="absolute top-1/3 left-1/4 w-32 md:w-64 h-32 md:h-64 bg-gradient-to-br from-emerald-500/20 via-teal-500/10 to-cyan-500/20 rounded-full blur-3xl"
+          className="absolute top-1/3 left-1/4 w-32 md:w-64 h-32 md:h-64 bg-gradient-to-br from-emerald-500/20 via-teal-500/10 to-cyan-500/20 dark:from-emerald-400/30 dark:via-teal-400/15 dark:to-cyan-400/30 rounded-full blur-3xl"
           animate={floatingAnimation}
         />
       </div>
@@ -195,18 +195,18 @@ export default function AboutSection() {
             className="inline-block mb-4 md:mb-6"
             variants={itemVariants}
           >
-            <span className="inline-flex items-center gap-2 px-4 md:px-6 py-2 text-sm font-medium bg-blue-100 dark:bg-blue-900/30 backdrop-blur-sm border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 rounded-full shadow-sm">
+            <span className="inline-flex items-center gap-2 px-4 md:px-6 py-2 text-sm font-medium bg-blue-100 dark:bg-blue-900/40 backdrop-blur-sm border border-blue-200 dark:border-blue-700/50 text-blue-700 dark:text-blue-300 rounded-full shadow-sm">
               <Sparkles className="w-4 h-4" />
               About Me
             </span>
           </motion.div>
 
           <motion.h2
-            className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 md:mb-8"
+            className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 md:mb-8 text-gray-900 dark:text-white"
             variants={itemVariants}
           >
             My Creative{" "}
-            <span className="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
               Journey
             </span>
           </motion.h2>
@@ -220,19 +220,19 @@ export default function AboutSection() {
               return (
                 <motion.div
                   key={trait.text}
-                  className="flex items-center gap-2 px-3 md:px-4 py-2 rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 shadow-sm"
+                  className="flex items-center gap-2 px-3 md:px-4 py-2 rounded-full bg-white/80 dark:bg-slate-800/90 backdrop-blur-sm border border-slate-200 dark:border-slate-600/50 shadow-sm"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
-                  <IconComponent className={`w-4 h-4 text-blue-500`} />
-                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">{trait.text}</span>
+                  <IconComponent className={`w-4 h-4 text-blue-500 dark:text-blue-400`} />
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-200">{trait.text}</span>
                 </motion.div>
               );
             })}
           </motion.div>
 
           <motion.p
-            className="text-lg md:text-xl text-slate-600 dark:text-slate-400 font-light max-w-3xl mx-auto leading-relaxed px-4"
+            className="text-lg md:text-xl text-slate-600 dark:text-slate-300 font-light max-w-3xl mx-auto leading-relaxed px-4"
             variants={itemVariants}
           >
             Crafting digital experiences with passion, precision, and a touch of magic ✨
@@ -256,7 +256,7 @@ export default function AboutSection() {
                 whileHover={{ y: -5 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
-                <div className="relative p-6 md:p-8 rounded-2xl md:rounded-3xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 shadow-lg">
+                <div className="relative p-6 md:p-8 rounded-2xl md:rounded-3xl bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm border border-slate-200 dark:border-slate-600/50 shadow-lg hover:shadow-xl dark:hover:shadow-2xl transition-shadow duration-300">
                   <div className="mb-4 md:mb-6">
                     <div className={`w-12 md:w-16 h-12 md:h-16 rounded-xl md:rounded-2xl bg-gradient-to-br ${stat.color} p-0.5`}>
                       <div className="w-full h-full bg-white dark:bg-slate-800 rounded-xl md:rounded-2xl flex items-center justify-center">
@@ -288,26 +288,26 @@ export default function AboutSection() {
         >
           {/* Main bio card */}
           <motion.div
-            className="lg:col-span-8 p-6 md:p-8 rounded-2xl md:rounded-3xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 shadow-lg"
+            className="lg:col-span-8 p-6 md:p-8 rounded-2xl md:rounded-3xl bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm border border-slate-200 dark:border-slate-600/50 shadow-lg"
             variants={itemVariants}
           >
             <div className="space-y-4 md:space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/40 border border-blue-200 dark:border-blue-700/50 rounded-full">
                 <Brain className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                 <span className="text-sm font-medium text-blue-700 dark:text-blue-300">Developer Story</span>
               </div>
 
               <div className="space-y-4 text-slate-600 dark:text-slate-400 leading-relaxed text-sm md:text-base">
                 <p>
-                  I'm a <span className="font-semibold bg-gradient-to-r from-blue-600 to-purple-500 bg-clip-text text-transparent">passionate full-stack developer</span> currently pursuing my Bachelor of Technology at <span className="font-semibold text-blue-600 dark:text-blue-400">IES IPS Academy</span> with a stellar GPA of <span className="font-semibold text-green-500">8.5/10.0</span>.
+                  I'm a <span className="font-semibold bg-gradient-to-r from-blue-600 to-purple-500 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">passionate full-stack developer</span> currently pursuing my Bachelor of Technology at <span className="font-semibold text-blue-600 dark:text-blue-400">IES IPS Academy</span> with a stellar GPA of <span className="font-semibold text-green-500 dark:text-green-400">8.5/10.0</span>.
                 </p>
                 
                 <p>
-                  I specialize in crafting <span className="font-semibold text-slate-800 dark:text-slate-200">responsive, accessible, and high-performance</span> web applications using cutting-edge technologies. My expertise spans from <span className="text-blue-500 font-medium">React & Next.js</span> to <span className="text-green-500 font-medium">Node.js</span> and modern <span className="text-cyan-500 font-medium">design systems</span>.
+                  I specialize in crafting <span className="font-semibold text-slate-800 dark:text-slate-100">responsive, accessible, and high-performance</span> web applications using cutting-edge technologies. My expertise spans from <span className="text-blue-500 dark:text-blue-400 font-medium">React & Next.js</span> to <span className="text-green-500 dark:text-green-400 font-medium">Node.js</span> and modern <span className="text-cyan-500 dark:text-cyan-400 font-medium">design systems</span>.
                 </p>
                 
                 <p>
-                  My competitive spirit shines through hackathons like <span className="font-semibold text-purple-500">Hack Sangam</span> and <span className="font-semibold text-blue-600 dark:text-blue-400">Hack The Mountain 5.0</span>, where I've won awards for innovative solutions that push the boundaries of what's possible.
+                  My competitive spirit shines through hackathons like <span className="font-semibold text-purple-500 dark:text-purple-400">Hack Sangam</span> and <span className="font-semibold text-blue-600 dark:text-blue-400">Hack The Mountain 5.0</span>, where I've won awards for innovative solutions that push the boundaries of what's possible.
                 </p>
               </div>
             </div>
@@ -318,7 +318,7 @@ export default function AboutSection() {
             className="lg:col-span-4 space-y-4 md:space-y-6"
             variants={itemVariants}
           >
-            <div className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
+            <div className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700/50">
               <div className="text-center">
                 <div className="text-2xl md:text-3xl mb-2">🚀</div>
                 <h4 className="font-semibold mb-2 text-slate-800 dark:text-slate-200">Innovation Mindset</h4>
@@ -326,7 +326,7 @@ export default function AboutSection() {
               </div>
             </div>
 
-            <div className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
+            <div className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-700/50">
               <div className="text-center">
                 <div className="text-2xl md:text-3xl mb-2">💡</div>
                 <h4 className="font-semibold mb-2 text-slate-800 dark:text-slate-200">Problem Solver</h4>
@@ -347,9 +347,9 @@ export default function AboutSection() {
             className="text-center mb-12 md:mb-16"
             variants={itemVariants}
           >
-            <h3 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6">
+            <h3 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6 text-gray-900 dark:text-white">
               Technical{" "}
-              <span className="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
                 Mastery
               </span>
             </h3>
@@ -367,7 +367,7 @@ export default function AboutSection() {
                   className="group"
                   variants={itemVariants}
                 >
-                  <div className="p-4 md:p-6 rounded-2xl md:rounded-3xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 shadow-lg h-full">
+                  <div className="p-4 md:p-6 rounded-2xl md:rounded-3xl bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm border border-slate-200 dark:border-slate-600/50 shadow-lg h-full">
                     {/* Category header */}
                     <div className="flex items-center gap-3 mb-4 md:mb-6">
                       <div className={`w-10 md:w-12 h-10 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br ${category.gradient} p-0.5`}>
@@ -420,7 +420,7 @@ export default function AboutSection() {
           animate={isInView ? "visible" : "hidden"}
         >
           <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center">
-            <Button className="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 hover:opacity-90 shadow-lg transition-all duration-300 text-white px-6 md:px-10 py-3 md:py-4 text-base md:text-lg rounded-xl md:rounded-2xl">
+            <Button className="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 dark:from-blue-500 dark:via-purple-500 dark:to-pink-500 hover:opacity-90 shadow-lg hover:shadow-xl dark:hover:shadow-2xl transition-all duration-300 text-white px-6 md:px-10 py-3 md:py-4 text-base md:text-lg rounded-xl md:rounded-2xl">
               <span className="flex items-center gap-2">
                 View My Work 
                 <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
@@ -429,7 +429,7 @@ export default function AboutSection() {
             
             <Button
               variant="outline"
-              className="border-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-300 px-6 md:px-10 py-3 md:py-4 text-base md:text-lg rounded-xl md:rounded-2xl backdrop-blur-sm"
+              className="border-2 border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700/50 hover:border-slate-400 dark:hover:border-slate-500 transition-all duration-300 px-6 md:px-10 py-3 md:py-4 text-base md:text-lg rounded-xl md:rounded-2xl backdrop-blur-sm text-slate-700 dark:text-slate-200"
             >
               Download Resume
             </Button>

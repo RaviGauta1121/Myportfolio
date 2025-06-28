@@ -1,3 +1,4 @@
+//hero section
 "use client";
 
 import { motion } from "framer-motion";
@@ -12,8 +13,7 @@ const fadeIn = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.2, duration: 0.6 },
-  }),
+    transition: { delay: i * 0.2, duration: 0.6 },  }),
 };
 
 const staggerContainer = {
