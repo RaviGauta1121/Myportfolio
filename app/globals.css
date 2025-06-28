@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+*{
+  font-family: "Nunito", sans-serif !important ;
+
+}
+
 @layer base {
   :root {
     --background: 0 0% 99%;
@@ -62,11 +70,6 @@ html {
   scroll-behavior: smooth;
 }
 
-.font-sans {
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  font-feature-settings: "ss01", "ss02", "ss03", "ss04";
-  letter-spacing: -0.01em;
-}
 
 .font-mono {
   font-family: var(--font-geist-mono), ui-monospace, monospace;

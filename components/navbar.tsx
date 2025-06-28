@@ -27,10 +27,16 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("")
-  const [hoverItem, setHoverItem] = useState<string | null>(null);
+  const [hoverItem, setHoverItem] = useState<string | null>(null)
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
-  const navRef = useRef<HTMLElement | null>(null);
+  const navRef = useRef<HTMLElement | null>(null)
+
+  // Ensure component is mounted before using theme
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // Navigation links with Lucide icons
   const navItems = [
@@ -44,56 +50,54 @@ export function Navbar() {
   // Handle scroll for navbar appearance and active section
   useEffect(() => {
     // Make sure code runs only in the browser
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined") return
     
     const handleScroll = () => {
       // Update navbar appearance
-      if (window.scrollY > 10) {
-        setIsScrolled(true)
-      } else {
-        setIsScrolled(false)
-      }
+      setIsScrolled(window.scrollY > 10)
 
       // Calculate scroll progress
-      const scrollTop = window.scrollY;
-      const docHeight = document.body.scrollHeight - window.innerHeight;
-      const scrollPercent = scrollTop / docHeight * 100;
-      setScrollProgress(Math.min(scrollPercent, 100));
+      const scrollTop = window.scrollY
+      const docHeight = document.body.scrollHeight - window.innerHeight
+      const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0
+      setScrollProgress(Math.min(scrollPercent, 100))
 
       // Update active section based on scroll position
-      const sections = navItems.map(item => item.href.replace('/#', ''));
+      const sections = navItems.map(item => item.href.replace('/#', ''))
       
       // Find the current section based on scroll position
       for (const section of sections) {
-        const element = document.getElementById(section);
+        const element = document.getElementById(section)
         if (element) {
-          const rect = element.getBoundingClientRect();
+          const rect = element.getBoundingClientRect()
           // If the element is in view (with some buffer for better UX)
           if (rect.top <= 150 && rect.bottom >= 150) {
-            setActiveSection(section);
-            break;
+            setActiveSection(section)
+            return
           }
         }
       }
     }
 
-    window.addEventListener("scroll", handleScroll)
+    handleScroll() // Call once on mount
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [navItems])
 
   // Handle clicks outside the navbar to close it
   useEffect(() => {
-    // Make sure code runs only in the browser
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined") return
     
     const handleClickOutside = (event: MouseEvent) => {
       if (navRef.current && !navRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
+        setIsOpen(false)
       }
     }
 
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside)
+      return () => document.removeEventListener("mousedown", handleClickOutside)
+    }
   }, [isOpen])
 
   // Handle theme toggle with animation
@@ -116,6 +120,11 @@ export function Navbar() {
       setActiveSection(sectionId)
       setIsOpen(false)
     }
+  }
+
+  // Don't render theme-dependent content until mounted
+  if (!mounted) {
+    return null
   }
 
   return (
@@ -179,14 +188,12 @@ export function Navbar() {
           )}>
             {/* Floating background indicator */}
             <motion.div
-              className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/5 via-purple-600/5 to-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.3 }}
+              className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/5 via-purple-600/5 to-blue-600/5 opacity-30 transition-opacity duration-300"
             />
             
             {navItems.map((item, i) => {
-              const isActive = activeSection === item.href.replace('/#', '');
-              const IconComponent = item.icon;
+              const isActive = activeSection === item.href.replace('/#', '')
+              const IconComponent = item.icon
               
               return (
                 <motion.div
@@ -232,7 +239,6 @@ export function Navbar() {
                       {/* Sliding underline effect */}
                       <motion.div
                         className="absolute left-0 -bottom-1 h-0.5 w-0 bg-gradient-to-r from-primary to-purple-600 rounded-full"
-                        initial={{ width: 0 }}
                         animate={{ 
                           width: hoverItem === item.href && !isActive ? "100%" : "0%"
                         }}
@@ -261,7 +267,7 @@ export function Navbar() {
                     />
                   )}
                 </motion.div>
-              );
+              )
             })}
           </div>
         </motion.nav>
@@ -292,18 +298,8 @@ export function Navbar() {
               onClick={toggleTheme}
               className="rounded-xl relative overflow-hidden bg-background/60 backdrop-blur-md border border-border/50 hover:bg-primary/10 hover:border-primary/30 transition-all duration-300 group"
             >
-              <AnimatePresence mode="wait">
+              <AnimatePresence mode="wait" initial={false}>
                 {theme === "light" ? (
-                  <motion.div
-                    key="sun"
-                    initial={{ rotate: -180, opacity: 0, scale: 0.5 }}
-                    animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                    exit={{ rotate: 180, opacity: 0, scale: 0.5 }}
-                    transition={{ duration: 0.4, type: "spring", bounce: 0.3 }}
-                  >
-                    <Sun className="h-5 w-5 text-amber-500 drop-shadow-sm" />
-                  </motion.div>
-                ) : (
                   <motion.div
                     key="moon"
                     initial={{ rotate: 180, opacity: 0, scale: 0.5 }}
@@ -313,14 +309,22 @@ export function Navbar() {
                   >
                     <Moon className="h-5 w-5 text-blue-400 drop-shadow-sm" />
                   </motion.div>
+                ) : (
+                  <motion.div
+                    key="sun"
+                    initial={{ rotate: -180, opacity: 0, scale: 0.5 }}
+                    animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                    exit={{ rotate: 180, opacity: 0, scale: 0.5 }}
+                    transition={{ duration: 0.4, type: "spring", bounce: 0.3 }}
+                  >
+                    <Sun className="h-5 w-5 text-amber-500 drop-shadow-sm" />
+                  </motion.div>
                 )}
               </AnimatePresence>
               
               {/* Subtle glow effect */}
               <motion.div
                 className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 1 }}
               />
             </Button>
           </motion.div>
@@ -343,18 +347,8 @@ export function Navbar() {
             className="mr-2 rounded-xl bg-background/60 backdrop-blur-md border border-border/50"
             onClick={toggleTheme}
           >
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait" initial={false}>
               {theme === "light" ? (
-                <motion.div
-                  key="sun-mobile"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Sun className="h-5 w-5 text-amber-500" />
-                </motion.div>
-              ) : (
                 <motion.div
                   key="moon-mobile"
                   initial={{ rotate: 90, opacity: 0 }}
@@ -363,6 +357,16 @@ export function Navbar() {
                   transition={{ duration: 0.3 }}
                 >
                   <Moon className="h-5 w-5 text-blue-400" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="sun-mobile"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Sun className="h-5 w-5 text-amber-500" />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -427,8 +431,8 @@ export function Navbar() {
               transition={{ delay: 0.2, duration: 0.3 }}
             >
               {navItems.map((item, i) => {
-                const isActive = activeSection === item.href.replace('/#', '');
-                const IconComponent = item.icon;
+                const isActive = activeSection === item.href.replace('/#', '')
+                const IconComponent = item.icon
                 
                 return (
                   <motion.div
@@ -472,7 +476,6 @@ export function Navbar() {
                         {/* Mobile sliding underline */}
                         <motion.div
                           className="absolute left-0 -bottom-1 h-0.5 w-0 bg-gradient-to-r from-primary to-purple-600 rounded-full"
-                          initial={{ width: 0 }}
                           whileHover={{ width: "100%" }}
                           transition={{ duration: 0.3, ease: "easeInOut" }}
                         />
@@ -501,7 +504,7 @@ export function Navbar() {
                       />
                     </Link>
                   </motion.div>
-                );
+                )
               })}
             </motion.div>
           </motion.div>
@@ -510,9 +513,9 @@ export function Navbar() {
 
       {/* Premium scrolling indicator with gradient */}
       <motion.div 
-        className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-primary via-purple-500  to-cyan-500 shadow-lg shadow-primary/20"
+        className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-primary via-purple-500 to-cyan-500 shadow-lg shadow-primary/20"
         style={{ 
-          width: isScrolled ? `${scrollProgress}%` : "0%",
+          width: `${scrollProgress}%`,
           scaleX: isScrolled ? 1 : 0,
           transformOrigin: "left"
         }}
