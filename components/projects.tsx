@@ -202,7 +202,7 @@ const projects = [
     liveUrl: "https://bad-talks.iesipsacademystudentclubs.org/",
   },
   {
-    title: "Wanderlust",
+    title: "Stayfinder",
     description:
       "An Airbnb-inspired platform enabling users to list and book accommodations. Implemented user authentication, map integration, and dynamic listings.",
     tags: ["Node.js", "MongoDB", "EJS", "TailwindCSS", "Express"],
